@@ -18,6 +18,10 @@ public:
     float getReal(const std::string &section, const std::string &name, float defaultValue = 0.0f);
 
 private:
+    std::map<std::string, std::string> stringValues;
+    std::map<std::string, int> integerValues;
+    std::map<std::string, bool> booleanValues;
+    std::map<std::string, float> realValues;
     INIReader reader;
 
     Config() = default;
