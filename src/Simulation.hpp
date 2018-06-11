@@ -1,6 +1,7 @@
 #ifndef PUBLIC_TRANSPORT_SIMULATION_H
 #define PUBLIC_TRANSPORT_SIMULATION_H
 
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "Line.hpp"
 
@@ -16,7 +17,7 @@ public:
 private:
     sf::RenderWindow window;
     sf::Clock clock;
-    std::vector<Line> lines;
+    std::vector<std::shared_ptr<Line>> lines;
 
     void init();
 

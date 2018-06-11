@@ -1,34 +1,40 @@
 #ifndef PUBLIC_TRANSPORT_LINE_HPP
 #define PUBLIC_TRANSPORT_LINE_HPP
 
-
-// line is determined by it's starting and ending point as well as
-// by it's middle points (bus stops)
-
-// line is connected with vehicles using Schedule class
-
-// need to provide some sort of asking function
-// when vehicle ask it will respond with it's next step
-
-#include <list>
+#include <vector>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "BusStop.hpp"
+#include "SelbaWard/Spline.hpp"
+#include "Vehicle.hpp"
+
+class Vehicle;
 
 class Line {
 public:
     Line();
 
-    void draw(const sf::RenderTarget &renderTarget);
+    void update(float deltaTime);
 
-    void addBusStop(const BusStop &busStop);
+    void display(sf::RenderTarget &renderTarget);
 
-    void eraseBusStop(const BusStop &busStop);
+    void addBusStop(std::shared_ptr<BusStop> busStop);
+
+    void eraseBusStop(std::shared_ptr<BusStop> busStop);
+
+    unsigned long getBusStopCount();
+
+    std::shared_ptr<BusStop> getBusStop(int index);
+
+    void addVehicle(const std::shared_ptr<Vehicle> &vehicle);
+
+    void eraseVehicle(std::shared_ptr<Vehicle> vehicle);
 
 private:
-    std::list<BusStop> busStops;
+    std::vector<std::shared_ptr<BusStop>> busStops;
+    std::vector<std::shared_ptr<Vehicle>> vehicles;
     sf::Color color;
-
+    sw::Spline shape;
 };
 
 

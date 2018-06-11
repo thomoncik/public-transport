@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 #include "Passenger.hpp"
 
 class Passenger;
@@ -14,6 +15,8 @@ public:
     explicit BusStop(const sf::Vector2f &coordinates);
 
     void addPassenger(const Passenger &passenger);
+
+    void display(sf::RenderTarget &renderTarget);
 
     sf::Vector2f getCoordinates();
 

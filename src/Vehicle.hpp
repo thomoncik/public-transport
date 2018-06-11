@@ -2,19 +2,25 @@
 #define PUBLIC_TRANSPORT_VEHICLE_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "BusStop.hpp"
+#include "Line.hpp"
+
+class Line;
 
 class Vehicle {
 public:
     virtual ~Vehicle() = default;
 
-    virtual void setColor(const sf::Color &color) = 0;
-
-    virtual void setNextStop(const BusStop &stopCoordinates) = 0;
-
     virtual void update(float deltaTime) = 0;
 
-    virtual void draw(const sf::RenderTarget &renderTarget) const = 0;
+    virtual void draw(sf::RenderTarget &renderTarget) const = 0;
+
+protected:
+    std::shared_ptr<Line> line;
+    int busStopIndex = 0;
+
+    std::shared_ptr<BusStop> getNextStop();
 };
 
 #endif //PUBLIC_TRANSPORT_VEHICLE_H
