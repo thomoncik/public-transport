@@ -16,8 +16,10 @@ public:
 
 private:
     sf::RenderWindow window;
+    sf::View view;
     sf::Clock clock;
     std::vector<std::shared_ptr<Line>> lines;
+    sf::Vector2f viewOffset;
 
     void init();
 
