@@ -20,6 +20,7 @@ void Simulation::init() {
     auto bs2 = std::make_shared<BusStop>(sf::Vector2f(250, 100));
     auto bs3 = std::make_shared<BusStop>(sf::Vector2f(800, 600));
     auto bs4 = std::make_shared<BusStop>(sf::Vector2f(400, 500));
+
     lineA->addBusStop(bs1);
     lineA->addBusStop(bs2);
     lineA->addBusStop(bs3);
@@ -27,7 +28,43 @@ void Simulation::init() {
     lineA->addBusStop(bs1);
 
     auto t1 = std::make_shared<Tram>(bs1->getCoordinates(), lineA);
+    auto t2 = std::make_shared<Tram>(bs4->getCoordinates(), lineA);
     lineA->addVehicle(t1);
+    lineA->addVehicle(t2);
+
+
+    auto lineB = std::make_shared<Line>();
+
+    auto bsb1 = std::make_shared<BusStop>(sf::Vector2f(1000, 450));
+    auto bsb2 = std::make_shared<BusStop>(sf::Vector2f(600, 200));
+    auto bsb3 = std::make_shared<BusStop>(sf::Vector2f(400, 300));
+    auto bsb4 = std::make_shared<BusStop>(sf::Vector2f(600, 500));
+
+    lineB->addBusStop(bsb1);
+    lineB->addBusStop(bsb2);
+    lineB->addBusStop(bsb3);
+    lineB->addBusStop(bsb4);
+    lineB->addBusStop(bsb1);
+
+    auto tb1 = std::make_shared<Tram>(bsb1->getCoordinates(), lineB);
+    lineB->addVehicle(tb1);
+
+
+    auto lineC = std::make_shared<Line>();
+    this->lines.push_back(lineC);
+
+    auto bsc1 = std::make_shared<BusStop>(sf::Vector2f(1200, 50));
+    auto bsc2 = std::make_shared<BusStop>(sf::Vector2f(600, 200));
+    auto bsc3 = std::make_shared<BusStop>(sf::Vector2f(900, 20));
+
+    lineC->addBusStop(bsc1);
+    lineC->addBusStop(bsc2);
+    lineC->addBusStop(bsc3);
+    lineC->addBusStop(bsc1);
+
+    auto tc1 = std::make_shared<Tram>(bsc1->getCoordinates(), lineC);
+    lineC->addVehicle(tc1);
+    this->lines.push_back(lineB);
 }
 
 void Simulation::run() {

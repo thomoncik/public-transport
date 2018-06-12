@@ -16,33 +16,34 @@ void Config::parseFile(const std::string &fileName) {
 
 std::string Config::getString(const std::string &section, const std::string &name, const string &defaultValue) {
     std::string key = section + '.' + name;
-    if (this->stringValues.find(key) != this->stringValues.end()) {
-        return this->stringValues[key];
+    if (this->stringValues.find(key) == this->stringValues.end()) {
+        this->stringValues[key] = this->reader.Get(section, name, defaultValue);
     }
-    return this->reader.Get(section, name, defaultValue);
+
+    return this->stringValues[key];
 }
 
 int Config::getInteger(const std::string &section, const std::string &name, int defaultValue) {
     std::string key = section + '.' + name;
-    if (this->integerValues.find(key) != this->integerValues.end()) {
-        return this->integerValues[key];
+    if (this->integerValues.find(key) == this->integerValues.end()) {
+        this->integerValues[key] = static_cast<int>(this->reader.GetInteger(section, name, defaultValue));
     }
-    return static_cast<int>(this->reader.GetInteger(section, name, defaultValue));
+    return this->integerValues[key];
 }
 
 bool Config::getBoolean(const std::string &section, const std::string &name, bool defaultValue) {
     std::string key = section + '.' + name;
-    if (this->booleanValues.find(key) != this->booleanValues.end()) {
-        return this->booleanValues[key];
+    if (this->booleanValues.find(key) == this->booleanValues.end()) {
+        this->booleanValues[key] = this->reader.GetBoolean(section, name, defaultValue);
     }
-    return this->reader.GetBoolean(section, name, defaultValue);
+    return this->booleanValues[key];
 }
 
 float Config::getReal(const std::string &section, const std::string &name, float defaultValue) {
     std::string key = section + '.' + name;
-    if (this->realValues.find(key) != this->realValues.end()) {
-        return this->realValues[key];
+    if (this->realValues.find(key) == this->realValues.end()) {
+        this->realValues[key] = static_cast<float>(this->reader.GetReal(section, name, defaultValue));
     }
-    return static_cast<float>(this->reader.GetReal(section, name, defaultValue));
+    return this->realValues[key];
 }
 

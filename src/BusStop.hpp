@@ -18,11 +18,14 @@ public:
 
     void display(sf::RenderTarget &renderTarget);
 
+    void setColor(const sf::Color &color);
+
     sf::Vector2f getCoordinates();
 
 private:
     std::vector<Passenger> passengersWaiting;
     sf::Vector2f coordinates;
+    sf::Color color;
 };
 
 

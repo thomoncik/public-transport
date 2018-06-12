@@ -1,11 +1,22 @@
 #include <SelbaWard/Spline.hpp>
+#include <iostream>
+#include <sstream>
 #include "Line.hpp"
 #include "Config.hpp"
+#include "Counted.hpp"
 
 Line::Line() {
     this->shape.setThickness(14);
-    auto fillColor = (unsigned int) Config::getInstance().getInteger("bus_stop", "fill_color", 0x000000ff);
-    this->shape.setColor(sf::Color(fillColor));
+
+//    std::cout << "Create line #" << Counted<Line>::getInstancesCount() << std::endl;
+
+    std::stringstream ss;
+    ss << Counted<Line>::getInstancesCount();
+    std::string s;
+    ss >> s;
+    std::cout << s << std::endl;
+    this->color = sf::Color((sf::Uint32) Config::getInstance().getInteger("line", "color" + s));
+    this->shape.setColor(this->color);
 }
 
 void Line::update(float deltaTime) {
@@ -26,8 +37,10 @@ void Line::display(sf::RenderTarget &renderTarget) {
 }
 
 void Line::addBusStop(std::shared_ptr<BusStop> busStop) {
+    busStop->setColor(this->color);
     this->busStops.push_back(busStop);
     this->shape.addVertex(busStop->getCoordinates());
+    this->shape.smoothHandles();
     this->shape.update();
 }
 
@@ -44,10 +57,14 @@ std::shared_ptr<BusStop> Line::getBusStop(int index) {
     return this->busStops[index];
 }
 
-void Line::addVehicle(const std::shared_ptr<Vehicle> &vehicle) {
+void Line::addVehicle(std::shared_ptr<Vehicle> vehicle) {
     this->vehicles.push_back(vehicle);
 }
 
 void Line::eraseVehicle(std::shared_ptr<Vehicle> vehicle) {
     // erase
+}
+
+sf::Color Line::getVehicleColor() {
+    return this->color;
 }

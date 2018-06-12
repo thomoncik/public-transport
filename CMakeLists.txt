@@ -4,7 +4,7 @@ project(public-transport)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES src/main.cpp src/SelbaWard/Spline.cpp src/Simulation.cpp src/Tram.cpp src/Vehicle.cpp src/Passenger.cpp
-        src/Line.cpp src/BusStop.cpp src/Config.cpp)
+        src/Line.cpp src/BusStop.cpp src/Config.cpp src/Counted.cpp)
 add_executable(public-transport ${SOURCE_FILES})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")

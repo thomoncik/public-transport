@@ -7,10 +7,11 @@
 #include "BusStop.hpp"
 #include "SelbaWard/Spline.hpp"
 #include "Vehicle.hpp"
+#include "Counted.hpp"
 
 class Vehicle;
 
-class Line {
+class Line : private Counted<Line> {
 public:
     Line();
 
@@ -26,11 +27,15 @@ public:
 
     std::shared_ptr<BusStop> getBusStop(int index);
 
-    void addVehicle(const std::shared_ptr<Vehicle> &vehicle);
+    void addVehicle(std::shared_ptr<Vehicle> vehicle);
 
     void eraseVehicle(std::shared_ptr<Vehicle> vehicle);
 
+    sf::Color getVehicleColor();
+
 private:
+    static unsigned long linesInitialized;
+
     std::vector<std::shared_ptr<BusStop>> busStops;
     std::vector<std::shared_ptr<Vehicle>> vehicles;
     sf::Color color;

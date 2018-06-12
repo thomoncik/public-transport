@@ -3,6 +3,7 @@
 #include "Config.hpp"
 
 BusStop::BusStop(const sf::Vector2f &coordinates) : coordinates(coordinates) {
+    this->color = sf::Color::Black;
 }
 
 void BusStop::addPassenger(const Passenger &passenger) {
@@ -16,11 +17,15 @@ void BusStop::display(sf::RenderTarget &renderTarget) {
     auto fillColor = (unsigned int) Config::getInstance().getInteger("bus_stop", "fill_color", 0x000000ff);
     auto outlineColor = (unsigned int) Config::getInstance().getInteger("bus_stop", "outline_color", 0x000000ff);
     shape.setFillColor(sf::Color(fillColor));
-    shape.setOutlineColor(sf::Color(outlineColor));
+    shape.setOutlineColor(this->color);
     shape.setPosition(this->coordinates);
     renderTarget.draw(shape);
 }
 
 sf::Vector2f BusStop::getCoordinates() {
     return this->coordinates;
+}
+
+void BusStop::setColor(const sf::Color &color) {
+    this->color = color;
 }

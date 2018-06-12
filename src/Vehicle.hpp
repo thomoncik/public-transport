@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "BusStop.hpp"
+#include "Counted.hpp"
 #include "Line.hpp"
 
 class Line;
@@ -21,6 +22,7 @@ protected:
     int busStopIndex = 0;
 
     std::shared_ptr<BusStop> getNextStop();
+    void nextStop();
 };
 
 #endif //PUBLIC_TRANSPORT_VEHICLE_H
