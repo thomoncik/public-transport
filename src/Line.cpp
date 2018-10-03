@@ -1,4 +1,4 @@
-#include <SelbaWard/Spline.hpp>
+#include "SelbaWard/Spline.hpp"
 #include <iostream>
 #include <sstream>
 #include "Line.hpp"
