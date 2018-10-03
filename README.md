@@ -1,2 +1,3 @@
-# public-transport
-Semester project for Programming Course at Jagiellonian University
+# Public transport simulation
+
+![screenshot](screenshot.png?raw=true)
